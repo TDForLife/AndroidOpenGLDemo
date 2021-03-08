@@ -14,7 +14,6 @@ import edu.wuwang.opengl.R;
 public class VaryActivity extends BaseActivity {
 
     private GLSurfaceView mGLView;
-    private VaryRender render;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class VaryActivity extends BaseActivity {
     public void initGL() {
         mGLView = (GLSurfaceView) findViewById(R.id.mGLView);
         mGLView.setEGLContextClientVersion(2);
-        mGLView.setRenderer(render = new VaryRender(getResources()));
+        mGLView.setRenderer(new VaryRender(getResources()));
         mGLView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
 

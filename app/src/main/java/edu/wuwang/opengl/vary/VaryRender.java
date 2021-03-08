@@ -25,7 +25,7 @@ public class VaryRender implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-        //开启深度测试
+        // 开启深度测试
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         cube.create();
     }
@@ -44,14 +44,14 @@ public class VaryRender implements GLSurfaceView.Renderer {
         cube.setMatrix(tools.getFinalMatrix());
         cube.drawSelf();
 
-        //y轴正方形平移
+        // y 轴正方形平移
         tools.pushMatrix();
         tools.translate(0, 3, 0);
         cube.setMatrix(tools.getFinalMatrix());
         cube.drawSelf();
         tools.popMatrix();
 
-        //y轴负方向平移，然后按xyz->(0,0,0)到(1,1,1)旋转30度
+        // y 轴负方向平移，然后按 xyz->(0,0,0) 到 (1,1,1) 旋转 30 度
         tools.pushMatrix();
         tools.translate(0, -3, 0);
         tools.rotate(30f, 1, 1, 1);
@@ -59,12 +59,12 @@ public class VaryRender implements GLSurfaceView.Renderer {
         cube.drawSelf();
         tools.popMatrix();
 
-        //x轴负方向平移，然后按xyz->(0,0,0)到(1,-1,1)旋转120度，在放大到0.5倍
+        // x 轴负方向平移，然后按 xyz->(0,0,0) 到 (1,-1,1) 旋转 120 度，在放大到 0.5 倍
         tools.pushMatrix();
         tools.translate(-3, 0, 0);
         tools.scale(0.5f, 0.5f, 0.5f);
 
-        //在以上变换的基础上再进行变换
+        // 在以上变换的基础上再进行变换
         tools.pushMatrix();
         tools.translate(12, 0, 0);
         tools.scale(1.0f, 2.0f, 1.0f);
@@ -73,7 +73,7 @@ public class VaryRender implements GLSurfaceView.Renderer {
         cube.drawSelf();
         tools.popMatrix();
 
-        //接着被中断的地方执行
+        // 接着被中断的地方执行
         tools.rotate(30f, -1, -1, 1);
         cube.setMatrix(tools.getFinalMatrix());
         cube.drawSelf();
