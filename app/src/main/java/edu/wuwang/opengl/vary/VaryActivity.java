@@ -23,10 +23,10 @@ public class VaryActivity extends BaseActivity {
         initGL();
     }
 
-    public void initGL(){
-        mGLView= (GLSurfaceView) findViewById(R.id.mGLView);
+    public void initGL() {
+        mGLView = (GLSurfaceView) findViewById(R.id.mGLView);
         mGLView.setEGLContextClientVersion(2);
-        mGLView.setRenderer(render=new VaryRender(getResources()));
+        mGLView.setRenderer(render = new VaryRender(getResources()));
         mGLView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
 
