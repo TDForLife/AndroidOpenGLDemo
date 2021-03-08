@@ -22,10 +22,10 @@ public class Cube {
             -1.0f, -1.0f, 1.0f,   //正面左下1
             1.0f, -1.0f, 1.0f,    //正面右下2
             1.0f, 1.0f, 1.0f,     //正面右上3
-            -1.0f, 1.0f, -1.0f,    //反面左上4
-            -1.0f, -1.0f, -1.0f,   //反面左下5
-            1.0f, -1.0f, -1.0f,    //反面右下6
-            1.0f, 1.0f, -1.0f,     //反面右上7
+            -1.0f, 1.0f, -1.0f,   //反面左上4
+            -1.0f, -1.0f, -1.0f,  //反面左下5
+            1.0f, -1.0f, -1.0f,   //反面右下6
+            1.0f, 1.0f, -1.0f,    //反面右上7
     };
     final short[] index = {
             6, 7, 4, 6, 4, 5,    //后面
@@ -61,19 +61,15 @@ public class Cube {
     }
 
     private void initData() {
-        ByteBuffer a = ByteBuffer.allocateDirect(cubePositions.length * 4);
-        a.order(ByteOrder.nativeOrder());
-        vertexBuf = a.asFloatBuffer();
+        vertexBuf = ByteBuffer.allocateDirect(cubePositions.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
         vertexBuf.put(cubePositions);
         vertexBuf.position(0);
-        ByteBuffer b = ByteBuffer.allocateDirect(color.length * 4);
-        b.order(ByteOrder.nativeOrder());
-        colorBuf = b.asFloatBuffer();
+
+        colorBuf= ByteBuffer.allocateDirect(color.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
         colorBuf.put(color);
         colorBuf.position(0);
-        ByteBuffer c = ByteBuffer.allocateDirect(index.length * 2);
-        c.order(ByteOrder.nativeOrder());
-        indexBuf = c.asShortBuffer();
+
+        indexBuf = ByteBuffer.allocateDirect(index.length * 2).order(ByteOrder.nativeOrder()).asShortBuffer();
         indexBuf.put(index);
         indexBuf.position(0);
     }
@@ -92,27 +88,22 @@ public class Cube {
     }
 
     public void drawSelf() {
-
-        //将程序加入到OpenGLES2.0环境
+        // 将程序加入到 OpenGLES2.0 环境
         GLES20.glUseProgram(mProgram);
-        //指定vMatrix的值
+        // 指定 vMatrix 的值
         if (matrix != null) {
             GLES20.glUniformMatrix4fv(hMatrix, 1, false, matrix, 0);
         }
-        //启用句柄
+        // 启用句柄
         GLES20.glEnableVertexAttribArray(hVertex);
         GLES20.glEnableVertexAttribArray(hColor);
-        //准备三角形的坐标数据
-        GLES20.glVertexAttribPointer(hVertex, 3,
-                GLES20.GL_FLOAT, false,
-                0, vertexBuf);
-        //设置绘制三角形的颜色
-        GLES20.glVertexAttribPointer(hColor, 4,
-                GLES20.GL_FLOAT, false,
-                0, colorBuf);
-        //索引法绘制正方体
+        // 准备三角形的坐标数据
+        GLES20.glVertexAttribPointer(hVertex, 3, GLES20.GL_FLOAT, false,0, vertexBuf);
+        // 设置绘制三角形的颜色
+        GLES20.glVertexAttribPointer(hColor, 4, GLES20.GL_FLOAT, false,0, colorBuf);
+        // 索引法绘制正方体
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, index.length, GLES20.GL_UNSIGNED_SHORT, indexBuf);
-        //禁止顶点数组的句柄
+        // 禁止顶点数组的句柄
         GLES20.glDisableVertexAttribArray(hVertex);
         GLES20.glDisableVertexAttribArray(hColor);
     }
